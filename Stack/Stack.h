@@ -1,10 +1,4 @@
 ﻿#pragma once
-RECT beginPos = { 250, 150, 370, 200 }; // tọa độ node xuất hiện để di chuyển vào stack
-RECT topPos; // tọa độ của top stack
-RECT firstNodePos = { 440, 390, 560, 440 }; 
-RECT endPos = { 630, 150, 755, 200 }; // tọa độ node dừng sau khi di chuyển khỏi stack
-int sleepTime = 100;
-int maxCap = 4; // số node tối đa
 
 struct NODE {
     string data;
@@ -63,13 +57,7 @@ struct STACK {
     }
 };
 
-void drawStackFrame()
-{
-    setcolor(15);
-    line(420, 200, 420, 450);
-    line(420, 450, 578, 450);
-    line(578, 200, 578, 450);
-}
+
 
 
 

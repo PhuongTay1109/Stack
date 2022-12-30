@@ -9,13 +9,21 @@
 #include <algorithm>
 using namespace std;
 
-STACK* st = new STACK();
+void drawStackFrame();
 void drawWelcomeInterface();
 void drawStackFrame();
 void stackSimulation();
 void drawPush(string data);
 void drawPop(int x1, int y1, int x2, int y2, string preTop);
 void drawObjectsInStack();
+
+STACK* st = new STACK();
+RECT beginPos = { 250, 150, 370, 200 }; // tọa độ node xuất hiện để di chuyển vào stack
+RECT topPos; // tọa độ của top stack
+RECT firstNodePos = { 440, 390, 560, 440 };
+RECT endPos = { 630, 150, 755, 200 }; // tọa độ node dừng sau khi di chuyển khỏi stack
+int sleepTime = 100;
+int maxCap = 4; // số node tối đa
 
 int main()
 {
@@ -29,6 +37,14 @@ int main()
     stackSimulation();
 
     return 0;
+}
+
+void drawStackFrame()
+{
+    setcolor(15);
+    line(420, 200, 420, 450);
+    line(420, 450, 578, 450);
+    line(578, 200, 578, 450);
 }
 
 void drawWelcomeInterface()
@@ -86,7 +102,7 @@ void drawObjectsInStack()
     system("cls");
     drawStackFrame();
 
-    // Nếu stack rỗng thì thoát luôn sau khi vẽ khung stack
+    // Nếu stack rỗng thì thoát sau khi vẽ khung stack
     if (st->isEmpty()) {
         return;
     }
