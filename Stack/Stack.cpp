@@ -18,12 +18,12 @@ void drawPop(int x1, int y1, int x2, int y2, string preTop);
 void drawObjectsInStack();
 
 STACK* st = new STACK();
-RECT beginPos = { 250, 150, 370, 200 }; // tọa độ node xuất hiện để di chuyển vào stack
-RECT topPos; // tọa độ của top stack
+RECT beginPos = { 250, 150, 370, 200 }; 
+RECT topPos;
 RECT firstNodePos = { 440, 390, 560, 440 };
-RECT endPos = { 630, 150, 755, 200 }; // tọa độ node dừng sau khi di chuyển khỏi stack
+RECT endPos = { 630, 150, 755, 200 }; 
 int sleepTime = 100;
-int maxCap = 4; // số node tối đa
+int maxCap = 4;
 
 int main()
 {
@@ -96,18 +96,15 @@ void drawWelcomeInterface()
     drawText(420, 530, "Press any key to start.", 255, 255, 255);
 }
 
-// Vẽ các node trong stack
 void drawObjectsInStack()
 {
     system("cls");
     drawStackFrame();
 
-    // Nếu stack rỗng thì thoát sau khi vẽ khung stack
     if (st->isEmpty()) {
         return;
     }
 
-    // Duyệt stack và đưa các giá trị vào vector 
     NODE* tmp = st->top;
     vector<string> data;
     for (int i = 0; i < st->size(); i++)
@@ -115,20 +112,17 @@ void drawObjectsInStack()
         data.push_back(tmp->data);
         tmp = tmp->next;
     }
-    // Đảo ngược lại vector để giá trị đúng chiều
     reverse(data.begin(), data.end());
 
-    // Bắt đầu vẽ từ tọa độ node đầu tiên
     int x1 = firstNodePos.left, y1 = firstNodePos.top, x2 = firstNodePos.right, y2 = firstNodePos.bottom;
     for (int i = 0; i < st->size(); i++)
     {
         if (i != 0)
         {
-            y2 = y1 - 10; // mỗi node cách nhau 10 đơn vị
-            y1 = y2 - 50; // độ rỗng mỗi node là 50 đơn vị
+            y2 = y1 - 10; 
+            y1 = y2 - 50; 
         }
-        block(x1, y1, x2, y2, data[i].c_str()); // vẽ hình node
-        // cập nhật vị trí của top
+        block(x1, y1, x2, y2, data[i].c_str());
         topPos.left = x1;
         topPos.top = y1;
         topPos.right = x2;
@@ -136,11 +130,9 @@ void drawObjectsInStack()
     }
 }
 
-// Vẽ stack khi xóa
 void drawPop(int x1, int y1, int x2, int y2, string preTop)
 {
     int stop_y1, stop_y2;
-    // di chuyển chiều dọc
     for (int i = 0; i < 150; i += 40)
     {
         system("cls");
@@ -150,7 +142,7 @@ void drawPop(int x1, int y1, int x2, int y2, string preTop)
         drawObjectsInStack();
         Sleep(sleepTime);
     }
-    // di chuyển chiều ngang
+
     for (int i = 0; i < 260; i += 40)
     {
         system("cls");
@@ -158,12 +150,12 @@ void drawPop(int x1, int y1, int x2, int y2, string preTop)
         drawObjectsInStack();
         Sleep(sleepTime);
     }
+    drawObjectsInStack();
 }
 
 void drawPush(string data)
 {
     int stop_x1, stop_x2;
-    // di chuyển chiều ngang
     for (int i = 0; i < 200; i += 40)
     {
         system("cls");
@@ -173,7 +165,7 @@ void drawPush(string data)
         drawObjectsInStack();
         Sleep(sleepTime);
     }
-    // di chuyển chiều dọc
+
     for (int i = 0; i < getmaxy(); i += 50)
     {
         if (beginPos.bottom + i > firstNodePos.bottom - 60 *st->size())
@@ -183,7 +175,7 @@ void drawPush(string data)
         drawObjectsInStack();
         Sleep(sleepTime);
     }
-    // thêm node mới vào stack và vẽ lại lần nữa
+
     st->insert(data);
     drawObjectsInStack();
 }
@@ -215,9 +207,7 @@ void stackSimulation()
     {
         if (!st->isEmpty())
         {
-            // lưu lại giá trị của top cũ
             string preTop = st->top->data;
-            // xóa 
             st->deleteElement();
             drawPop(topPos.left, topPos.top, topPos.right, topPos.bottom, preTop);
             stackSimulation();

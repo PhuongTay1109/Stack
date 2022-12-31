@@ -16,7 +16,7 @@ struct STACK {
         if (top == nullptr)
             return true;
         return false;
-    }
+    }.
 
     NODE* makeNode(string x) {
         NODE* newNode = new NODE();
